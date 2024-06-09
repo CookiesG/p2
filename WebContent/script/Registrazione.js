@@ -6,7 +6,7 @@ function checkNomeCognome(inputtxt) {
 	if(inputtxt.value.match(nome)) 
 		return true
 
-	return false;	
+	return fal se;	
 }
 
 
