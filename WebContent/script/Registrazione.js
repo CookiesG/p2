@@ -30,7 +30,7 @@ if (emailPattern.test (email)) {
 function checkData(inputtxt) {
 	var data =  /^\d{1,2}-\d{1,2}-\d{4}$/;
 	if(inputtxt.value.match(data)) 
-		return true;
+		return true; 
 	
 	return false;	
 }
