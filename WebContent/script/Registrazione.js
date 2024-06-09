@@ -15,7 +15,7 @@ function checkEmail(inputtxt) {
 var email = "test@example.com";
 
 if (emailPattern.test (email)) {
-    console.log("Email valida");
+    console.log("Email  valida");
 } else {
     console.log("Email non valida");
 }
