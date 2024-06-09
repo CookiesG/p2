@@ -154,12 +154,31 @@ public class ProdottoDao implements ProdottoDaoInterfaccia{
 		String selectSQL = "SELECT * FROM " + ProdottoDao.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
-		}
+			List<String> validColumns = Arrays.asList("colonna1", "colonna2", "colonna3");
 
-		try {
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
+			// Assumiamo che 'order' sia una variabile che contiene il parametro di ordinamento fornito dall'utente
+			String order = request.getParameter("order");
+
+			// Verifica se la colonna è valida
+			if (validColumns.contains(order)) {
+			    selectSQL += " ORDER BY " + order;
+			}
+
+			// Restante codice SQL
+			try {
+			    connection = ds.getConnection();
+			    preparedStatement = connection.prepareStatement(selectSQL);
+
+			    // Esegui la query in modo sicuro
+			    resultSet = preparedStatement.executeQuery();
+			    // Gestisci il risultato della query
+			} catch (SQLException e) {
+			    e.printStackTrace();
+			} finally {
+			    if (resultSet != null) try { resultSet.close(); } catch (SQLException e) { e.printStackTrace(); }
+			    if (preparedStatement != null) try { preparedStatement.close(); } catch (SQLException e) { e.printStackTrace(); }
+			    if (connection != null) try { connection.close(); } catch (SQLException e) { e.printStackTrace(); }
+			}
 
 			ResultSet rs = preparedStatement.executeQuery();
 
